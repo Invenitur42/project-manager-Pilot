@@ -1,103 +1,95 @@
-# Project Management Dashboard
+# Project Manager Pilot
 
-A full-stack **project management** application inspired by tools like Trello / Linear / Asana.
+Full-stack **project management** app: projects, Kanban boards, tasks, priorities, and memberships.
 
-Built for mid-level full-stack developer interviews. Demonstrates real product features: multi-user projects, boards, tasks, statuses, assignments, and a clean dashboard UI.
+[![Open in Codespaces](https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?logo=github)](https://codespaces.new/Invenitur42/project-manager-Pilot)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688)](https://fastapi.tiangolo.com/)
+[![Next.js](https://img.shields.io/badge/Frontend-Next.js%2015-black)](https://nextjs.org/)
+
+> **Live demo:** _Add Vercel + API URLs after deploy_
+
+---
+
+## About this project
+
+A classic product-shaped portfolio piece for **full-stack interviews**:
+
+- Hierarchical data: **Project → Board → Task**
+- Auth + **member-scoped access** (only members see a project)
+- Working Next.js UI: dashboard, create projects, Kanban columns, move/delete tasks
+
+**Why it matters for hiring:** Shows you can model real domain data and ship a usable UI, not only CRUD tutorials.
 
 ---
 
 ## Features
 
-- [x] User authentication (JWT)
-- [x] Projects (create, list, update, archive)
-- [x] Boards / columns (Kanban-style)
-- [x] Tasks with title, description, status, priority, due date, assignee
-- [x] Project membership (owner + members)
-- [x] Dashboard overview (my projects, recent tasks)
-- [x] Docker Compose (Postgres)
-- [x] Next.js frontend structure
-- [ ] Drag-and-drop board UI (optional enhancement)
-- [ ] Real-time updates (WebSocket – optional)
+- JWT auth
+- Create / list projects (owner becomes member)
+- Default boards: To Do · In Progress · Done
+- Tasks: title, priority, move between boards, delete
+- Dockerized Postgres
 
 ---
 
-## Tech Stack
+## Tech stack
 
-| Layer    | Technology                          |
-|----------|-------------------------------------|
-| Frontend | Next.js 15 + TypeScript + Tailwind  |
-| Backend  | FastAPI + Python 3.11+              |
-| Database | PostgreSQL + SQLAlchemy             |
-| Auth     | JWT (python-jose + passlib)         |
-| Infra    | Docker + docker-compose             |
+| Layer | Tech |
+|-------|------|
+| Frontend | Next.js 15, TypeScript, Tailwind |
+| Backend | FastAPI, SQLAlchemy, JWT |
+| DB | PostgreSQL |
 
 ---
 
-## Architecture
-
-```
-User → Next.js Frontend
-         ↓
-      FastAPI Backend
-         ├── Auth
-         ├── Projects & Memberships
-         ├── Boards / Columns
-         └── Tasks
-         ↓
-      PostgreSQL
-```
-
----
-
-## API Overview
-
-| Method | Endpoint                         | Description              |
-|--------|----------------------------------|--------------------------|
-| POST   | `/api/v1/auth/register`          | Register                 |
-| POST   | `/api/v1/auth/login`             | Login                    |
-| GET    | `/api/v1/auth/me`                | Current user             |
-| GET    | `/api/v1/projects/`              | List my projects         |
-| POST   | `/api/v1/projects/`              | Create project           |
-| GET    | `/api/v1/projects/{id}`          | Project detail + boards  |
-| POST   | `/api/v1/projects/{id}/boards`   | Add board/column         |
-| POST   | `/api/v1/tasks/`                 | Create task              |
-| PATCH  | `/api/v1/tasks/{id}`             | Update task              |
-| DELETE | `/api/v1/tasks/{id}`             | Delete task              |
-
----
-
-## Getting Started
+## Run locally
 
 ```bash
-git clone https://github.com/Invenitur42/project-management-dashboard.git
-cd project-management-dashboard
-docker-compose up -d
+git clone https://github.com/Invenitur42/project-manager-Pilot.git
+cd project-manager-Pilot
+docker compose up -d
 
-# Backend
-cd backend
-cp .env.example .env
+cd backend && cp .env.example .env
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python -m app.db.init_db
 uvicorn app.main:app --reload --port 8000
 
-# Frontend
-cd ../frontend
-npm install && npm run dev
+# new terminal
+cd frontend && npm install && npm run dev
 ```
 
-Open http://localhost:3000
+| Service | URL |
+|---------|-----|
+| UI | http://localhost:3000 |
+| API docs | http://localhost:8000/docs |
+
+**Or:** **Code → Codespaces** on GitHub.
 
 ---
 
-## Interview Talking Points
+## Interview talking points
 
-- Data modeling for hierarchical resources (Project → Board → Task)
-- Authorization: only project members can view/edit
-- Soft status transitions vs hard deletes
-- How you would add real-time collaboration later
-- Pagination and filtering strategies for large task lists
+1. **Data model** — why boards sit between projects and tasks.
+2. **Authorization** — membership checks on every project/task mutation.
+3. **Default boards on create** — product defaults that reduce empty states.
+4. **Moving tasks** — status as board placement vs a separate enum.
+5. **Next** — drag-and-drop, WebSockets for multi-user boards, pagination.
 
 ---
 
-Part of a full-stack portfolio focused on production-style applications.
+## Deploy
+
+- Frontend → Vercel (`frontend/`)
+- Backend → Railway/Render (`backend/`)
+- Postgres → managed instance; set `DATABASE_URL`
+
+---
+
+## Screenshots
+
+_Add: project list, Kanban board, task card._
+
+---
+
+Portfolio hub: [ai-tools-portfolio](https://github.com/Invenitur42/ai-tools-portfolio)
