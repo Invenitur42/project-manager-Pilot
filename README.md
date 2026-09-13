@@ -4,7 +4,7 @@ Simple project board app. Create projects, get default columns (To Do / In Progr
 
 **FastAPI + Postgres + Next.js**
 
-**Live demo:** [Open Project Manager](https://invenitur42.github.io/project-manager-Pilot/)  
+**Live demo:** [Open Project Manager](https://invenitur42.github.io/portfolio-live-demos/pm/)  
 (All demos: [portfolio-live-demos](https://invenitur42.github.io/portfolio-live-demos/))
 
 [Open in Codespaces](https://codespaces.new/Invenitur42/project-manager-Pilot)
